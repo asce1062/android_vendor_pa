@@ -13,28 +13,32 @@
 # limitations under the License.
 
 # Check for target product
-ifeq (pa_moto_msm8960_jbbl,$(TARGET_PRODUCT))
+
+ifeq (pa_p700,$(TARGET_PRODUCT))
 
 # OVERLAY_TARGET adds overlay asset source
-OVERLAY_TARGET := pa_xhdpi
+OVERLAY_TARGET := pa_hdpi
 
-# Build paprefs from sources
 PREFS_FROM_SOURCE ?= false
-
-# Inherit telephony common stuff
-$(call inherit-product, vendor/pa/configs/telephony.mk)
 
 # Include AOSPA common configuration
 include vendor/pa/main.mk
 
-# Inherit AOSP device configuration
-$(call inherit-product, device/motorola/moto_msm8960_jbbl/full_moto_msm8960.mk)
+# Inherit device configuration
+$(call inherit-product, device/lge/p700/full_p700.mk)
+
+PRODUCT_PACKAGES += Trebuchet
 
 # Override AOSP build properties
-PRODUCT_DEVICE := moto_msm8960_jbbl
-PRODUCT_NAME := pa_moto_msm8960_jbbl
-PRODUCT_BRAND := motorola
-PRODUCT_MODEL := MOTOROLA MSM8960
-PRODUCT_MANUFACTURER := motorola
+PRODUCT_DEVICE := p700
+PRODUCT_NAME := pa_p700
+PRODUCT_BRAND := lge
+PRODUCT_MODEL := LG-P700
+PRODUCT_MANUFACTURER := LGE
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=u0_open_eu \
+    PRIVATE_BUILD_DESC="p700-user 4.4.4 KTU84Q 144808 release-keys" \
+    BUILD_FINGERPRINT="lge/p700/4.4.4/KTU84Q/144808:user/release-keys"
 
 endif

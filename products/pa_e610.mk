@@ -14,30 +14,30 @@
 
 # Check for target product
 
-ifeq (pa_d802,$(TARGET_PRODUCT))
+ifeq (pa_e610,$(TARGET_PRODUCT))
 
 # OVERLAY_TARGET adds overlay asset source
-OVERLAY_TARGET := pa_g2
+OVERLAY_TARGET := pa_hdpi
 
-# Build paprefs from sources
 PREFS_FROM_SOURCE ?= false
-
-# Inherit telephony common stuff
-$(call inherit-product, vendor/pa/configs/telephony.mk)
 
 # Include AOSPA common configuration
 include vendor/pa/main.mk
 
 # Inherit device configuration
-$(call inherit-product, device/lge/d802/d802.mk)
+$(call inherit-product, device/lge/e610/full_e610.mk)
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := d802
-PRODUCT_NAME := pa_d802
-PRODUCT_BRAND := LGE
-PRODUCT_MODEL := LG-D802
-PRODUCT_MANUFACTURER := lge
+PRODUCT_PACKAGES += Trebuchet
 
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=d802 BUILD_FINGERPRINT=lge/g2_open_com/g2:4.4.2/KOT49I.D80220a/D80220a.1392133741:user/release-keys PRIVATE_BUILD_DESC="g2_open_com-user 4.4.2 KOT49I.D80220a D80220a.1392133741 release-keys"
+# Override AOSP build properties
+PRODUCT_DEVICE := e610
+PRODUCT_NAME := pa_e610
+PRODUCT_BRAND := lge
+PRODUCT_MODEL := LG-e610
+PRODUCT_MANUFACTURER := LGE
 
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=m4_open_eu \
+    BUILD_FINGERPRINT="lge/e610/4.4.2/KVT49L/000001:userdebug/release-keys" \
+    PRIVATE_BUILD_DESC="e610-userdebug 4.4.2 KVT49L 000001 release-keys"
 endif
